@@ -25,7 +25,7 @@ const formatDate = (date) => {
   });
 };
 
-function StockPurchaseDetailsModal({ purchase, onClose }) {
+function PurchaseDetailsModal({ purchase, onClose }) {
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.key === "Escape") {
@@ -235,4 +235,4 @@ function StockPurchaseDetailsModal({ purchase, onClose }) {
   );
 }
 
-export default StockPurchaseDetailsModal;
+export default PurchaseDetailsModal;

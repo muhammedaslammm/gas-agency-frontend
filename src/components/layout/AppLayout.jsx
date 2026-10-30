@@ -58,9 +58,9 @@ function AppLayout() {
             <span>Sales</span>
           </NavLink>
 
-          <NavLink to="/stocks" className={navLinkClass}>
+          <NavLink to="/purchases" className={navLinkClass}>
             <ArchiveBox size={18} weight="regular" />
-            <span>Stock Purchase</span>
+            <span>Purchases</span>
           </NavLink>
 
           <NavLink to="/customers" className={navLinkClass}>

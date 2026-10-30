@@ -7,10 +7,11 @@ import PublicOnlyRoute from "../components/layout/PublicOnlyRoute";
 import SalesPage from "../modules/sales/SalesPage";
 import CustomersPage from "../modules/customers/CustomerPage";
 import ProductsPage from "../modules/products/ProductsPage";
-import StocksPage from "../modules/stocks/StocksPage";
+import PurchasesPage from "../modules/purchases/PurchasesPage";
 import RoutesPage from "../modules/routes/RoutesPage";
 import CustomerDetailsPage from "../modules/customers/CustomerDetailsPage";
 import CustomerCreatePage from "../modules/customers/CustomerCreatePage";
+import PurchaseCreatePage from "../modules/purchases/PurchaseCreatePage";
 
 const router = createBrowserRouter([
   {
@@ -53,8 +54,12 @@ const router = createBrowserRouter([
             element: <ProductsPage />,
           },
           {
-            path: "/stocks",
-            element: <StocksPage />,
+            path: "/purchases/new",
+            element: <PurchaseCreatePage />,
+          },
+          {
+            path: "/purchases",
+            element: <PurchasesPage />,
           },
           {
             path: "/routes",

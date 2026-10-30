@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
-import { ArrowSquareOut, MagnifyingGlass } from "phosphor-react";
-import { getStockPurchases } from "./stocks.api";
-import StockPurchaseDetailsModal from "./StockPurchaseDetailsModal";
+import { ArrowSquareOut, MagnifyingGlass, Plus } from "phosphor-react";
+import { useNavigate } from "react-router-dom";
+import { getStockPurchases } from "./purchases.api";
+import StockPurchaseDetailsModal from "./PurchaseDetailsModal";
 
 const formatCurrency = (amount) =>
   new Intl.NumberFormat("en-IN", {
@@ -42,12 +43,14 @@ const getItemsSummary = (items = []) => {
   return visibleItems.join(", ");
 };
 
-function StockPage() {
+function PurchasePage() {
   const [purchases, setPurchases] = useState([]);
   const [search, setSearch] = useState("");
   const [selectedPurchase, setSelectedPurchase] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
+
+  const navigate = useNavigate();
 
   const loadPurchases = useCallback(async () => {
     setIsLoading(true);
@@ -105,10 +108,12 @@ function StockPage() {
             />
           </div>
 
-          <p className="whitespace-nowrap text-sm text-stone-500">
-            {filteredPurchases.length}{" "}
-            {filteredPurchases.length === 1 ? "purchase" : "purchases"}
-          </p>
+          <button
+            className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-colors bg-black text-white cursor-pointer"
+            onClick={() => navigate("/purchases/new")}
+          >
+            <Plus size={15} weight="bold" /> Add Purchase
+          </button>
         </div>
 
         {/* Error banner */}
@@ -139,13 +144,19 @@ function StockPage() {
                   Purchase Date
                 </th>
                 <th className="px-5 py-3.5 text-xs font-semibold uppercase tracking-wide text-stone-500">
+                  Invoice Number
+                </th>
+                <th className="px-5 py-3.5 text-xs font-semibold uppercase tracking-wide text-stone-500">
                   Supplier
                 </th>
                 <th className="px-5 py-3.5 text-xs font-semibold uppercase tracking-wide text-stone-500">
                   Items Purchased
                 </th>
+                <th className="px-5 py-3.5 text-center text-xs font-semibold uppercase tracking-wide text-stone-500">
+                  EMR
+                </th>
                 <th className="px-5 py-3.5 text-right text-xs font-semibold uppercase tracking-wide text-stone-500">
-                  Total Cost
+                  Total Bill
                 </th>
                 <th className="px-5 py-3.5 text-right text-xs font-semibold uppercase tracking-wide text-stone-500">
                   Action
@@ -196,6 +207,10 @@ function StockPage() {
                       </td>
 
                       <td className="px-5 py-4 font-medium text-gray-900">
+                        {purchase.invoiceNumber || "—"}
+                      </td>
+
+                      <td className="px-5 py-4 font-medium text-gray-900">
                         {purchase.supplierName || "Unknown supplier"}
                       </td>
 
@@ -210,8 +225,12 @@ function StockPage() {
                         {getItemsSummary(items)}
                       </td>
 
+                      <td className="px-5 py-4 text-center text-gray-600">
+                        {purchase.emr ? "Yes" : "No"}
+                      </td>
+
                       <td className="whitespace-nowrap px-5 py-4 text-right font-medium text-gray-900">
-                        {formatCurrency(purchase.totalCost)}
+                        {formatCurrency(purchase.totalBillPrice)}
                       </td>
 
                       <td className="px-5 py-4 text-right">
@@ -243,4 +262,4 @@ function StockPage() {
   );
 }
 
-export default StockPage;
+export default PurchasePage;

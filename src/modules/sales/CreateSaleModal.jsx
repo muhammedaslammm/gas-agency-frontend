@@ -786,7 +786,7 @@ export default function CreateSaleModal({ onClose, onCreated }) {
                         return (
                           <div
                             key={`empty-return-${index}`}
-                            className="grid gap-3 rounded-lg border border-stone-200 p-4 sm:grid-cols-12 sm:items-end"
+                            className="grid gap-3 rounded-lg border border-stone-200 p-4 grid-cols-12 items-start"
                           >
                             <div className="sm:col-span-6">
                               <label

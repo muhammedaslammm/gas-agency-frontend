@@ -12,5 +12,5 @@ export function getProducts() {
 }
 
 export function getProductsforCustomers() {
-  return apiRequest("/products/customers");
+  return apiRequest("/products/select");
 }
